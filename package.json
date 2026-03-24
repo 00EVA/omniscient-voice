@@ -1,0 +1,16 @@
+{
+  "name": "omniscient-voice",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Live Photo for your voice prompts. Never lose a good idea again.",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint",
+    "clean": "pnpm -r clean"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=10"
+  }
+}

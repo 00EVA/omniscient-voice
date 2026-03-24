@@ -1,0 +1,257 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 320px;
+  min-height: 200px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #0f0f11;
+  color: #e4e4e7;
+}
+
+.vv-container {
+  padding: 16px;
+}
+
+.vv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.vv-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vv-icon {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.vv-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fafafa;
+}
+
+.vv-tagline {
+  font-size: 11px;
+  color: #71717a;
+}
+
+.vv-status {
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.vv-status-indicator {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.vv-buffer-info {
+  font-size: 11px;
+  color: #a1a1aa;
+  margin-top: 4px;
+}
+
+.vv-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.vv-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.vv-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.vv-btn-primary {
+  background: #3b82f6;
+  color: white;
+}
+
+.vv-btn-primary:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.vv-btn-secondary {
+  background: #27272a;
+  color: #e4e4e7;
+  border: 1px solid #3f3f46;
+}
+
+.vv-btn-secondary:hover {
+  background: #3f3f46;
+}
+
+.vv-btn-ghost {
+  width: 100%;
+  padding: 8px;
+  background: none;
+  border: 1px solid #27272a;
+  border-radius: 6px;
+  color: #a1a1aa;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.vv-btn-ghost:hover {
+  background: #18181b;
+  color: #e4e4e7;
+}
+
+.vv-btn-back {
+  background: none;
+  border: none;
+  color: #71717a;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.vv-btn-back:hover {
+  background: #27272a;
+  color: #e4e4e7;
+}
+
+.vv-divider {
+  height: 1px;
+  background: #27272a;
+  margin: 12px 0;
+}
+
+.vv-footer {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.vv-shortcut {
+  font-size: 10px;
+  color: #52525b;
+}
+
+.vv-prompts-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.vv-prompt-card {
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 8px;
+}
+
+.vv-prompt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.vv-prompt-platform {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fafafa;
+}
+
+.vv-prompt-reason {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.vv-reason-error {
+  background: #7f1d1d;
+  color: #fca5a5;
+}
+
+.vv-reason-manual {
+  background: #1e3a5f;
+  color: #93c5fd;
+}
+
+.vv-prompt-time {
+  font-size: 11px;
+  color: #71717a;
+}
+
+.vv-prompt-duration {
+  font-size: 11px;
+  color: #a1a1aa;
+  margin-top: 2px;
+}
+
+.vv-prompt-text {
+  font-size: 12px;
+  color: #d4d4d8;
+  margin-top: 6px;
+  padding: 6px;
+  background: #09090b;
+  border-radius: 4px;
+  line-height: 1.4;
+}
+
+.vv-prompt-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.vv-btn-sm {
+  padding: 4px 8px;
+  font-size: 11px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.vv-btn-delete {
+  background: #27272a;
+  color: #ef4444;
+}
+
+.vv-btn-delete:hover {
+  background: #3f3f46;
+}
+
+.vv-empty {
+  text-align: center;
+  color: #52525b;
+  font-size: 13px;
+  padding: 32px 0;
+}
