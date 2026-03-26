@@ -209,6 +209,14 @@ Code audit update:
 - The current API uses permissive MVP auth defaults that should not be treated as production safe.
 - Build and test commands cannot currently be rerun in this clone because workspace dependencies are not installed yet, so the claimed ready state should be treated as unverified until install/build/test succeed again.
 
+Execution update:
+- Installed workspace dependencies with `pnpm install`.
+- Fixed the first critical issue: the extension content script no longer starts capture just because a supported site is open.
+- Capture now starts only when supported voice-session UI is detected and stops again when the voice session becomes inactive or the page session ends.
+- Reset offscreen session metadata on capture stop so stale platform and timer state do not linger after a session ends.
+- Re-ran core tests successfully: 26/26 passing.
+- Extension package build is still blocked by a separate preexisting packaging issue: Vite expects `packages/extension/public/icons/*` but those icon files are missing.
+
 ---
 
 ## Lessons

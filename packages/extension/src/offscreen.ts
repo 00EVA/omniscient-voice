@@ -79,6 +79,8 @@ function stopCapture(): { success: boolean } {
   mediaStream = null;
   audioContext = null;
   isCapturing = false;
+  currentPlatform = "unknown";
+  captureStartTime = 0;
 
   console.log("[OV:offscreen] Capture stopped");
   return { success: true };

@@ -70,13 +70,29 @@ function init(): void {
   if (!platform) return;
 
   console.log(`[OV:content] Platform detected: ${platform.name}`);
+  let lastVoiceActive = false;
 
-  // Auto-start capture when on a supported platform
-  send({ type: "START_CAPTURE", payload: { platform: platform.name } });
+  const syncCaptureState = () => {
+    const voiceActive = platform.isVoiceActive();
+    if (voiceActive === lastVoiceActive) return;
+
+    lastVoiceActive = voiceActive;
+
+    if (voiceActive) {
+      console.log("[OV:content] Voice session active, starting capture");
+      send({ type: "START_CAPTURE", payload: { platform: platform.name } });
+      return;
+    }
+
+    console.log("[OV:content] Voice session inactive, stopping capture");
+    send({ type: "STOP_CAPTURE" });
+  };
 
   // Watch for errors using MutationObserver
   let lastErrorState = false;
   const observer = new MutationObserver(() => {
+    syncCaptureState();
+
     const hasError = platform.hasError();
 
     if (hasError && !lastErrorState) {
@@ -92,6 +108,17 @@ function init(): void {
     subtree: true,
     attributes: true,
     attributeFilter: ["class", "data-testid"],
+  });
+
+  // Run an initial sync without starting capture unless voice is already active.
+  syncCaptureState();
+
+  // Some voice UIs update outside the observed attribute set, so keep a light poll running.
+  window.setInterval(syncCaptureState, 1000);
+
+  // Always stop capture when the current page session is ending.
+  window.addEventListener("pagehide", () => {
+    send({ type: "STOP_CAPTURE" });
   });
 
   // Listen for keyboard shortcut (Ctrl+Shift+S to manual save)
