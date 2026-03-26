@@ -49,6 +49,8 @@ iPhone Live Photos capture ~1.5s before and after the shutter press. The same co
 - **Local-first by default**: All audio stays on-device in IndexedDB. No cloud unless user opts in.
 - **Encryption**: Audio blobs encrypted at rest with user-derived key.
 - **Auto-cleanup**: Configurable retention (e.g., 7 days, 30 days, manual only).
+- **Session-based activation only**: The feature should only buffer audio during an active voice AI session or when the host app explicitly starts capture. It should not be always on.
+- **Resource discipline**: When no supported voice workflow is active, microphone capture and buffering should be disabled to reduce privacy risk and unnecessary memory usage.
 
 #### 5. Browser Extension Manifest V3 Constraints
 - Service workers have a 5-minute idle timeout. Audio processing must be in content scripts or offscreen documents.
@@ -199,6 +201,14 @@ All 5 packages build clean. 26/26 core tests pass. Ready for human testing.
 
 Repository update: this folder is now a standalone git repository instead of inheriting a larger parent repo. This avoids accidentally committing unrelated desktop and home-directory files when pushing the project to GitHub.
 
+Code audit update:
+- Reviewed the current monorepo for production-MVP risks.
+- Highest-risk issues found are in the extension activation model, prompt boundary tracking, and API security defaults.
+- The current extension starts capture too eagerly and does not yet enforce the intended session-based privacy boundary.
+- The current offscreen capture logic measures prompt duration from session start instead of the actual prompt start, which can save the wrong audio slice.
+- The current API uses permissive MVP auth defaults that should not be treated as production safe.
+- Build and test commands cannot currently be rerun in this clone because workspace dependencies are not installed yet, so the claimed ready state should be treated as unverified until install/build/test succeed again.
+
 ---
 
 ## Lessons
@@ -215,3 +225,4 @@ Repository update: this folder is now a standalone git repository instead of inh
 - Hono with `@hono/node-server` is extremely fast to set up for API MVPs. Zero-config Node HTTP server.
 - vite-plugin-static-copy handles copying manifest.json and HTML files to extension dist cleanly.
 - If a project folder lives inside a larger git repo, initialize a folder-local repo before the first project commit so unrelated files are not included.
+- The security boundary for this product is session-based buffering: activate only during intentional voice use, never as a general always-listening recorder.
